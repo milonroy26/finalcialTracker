@@ -2,6 +2,13 @@ import React from "react";
 import Layout from "../layout/Layout";
 
 const HomePage = () => {
+  const expensiveData = localStorage.getItem("expensive");
+  const expensiveRes = JSON.parse(expensiveData);
+  // income
+  const storedPersonData = localStorage.getItem("income");
+  const parsedPersonData = JSON.parse(storedPersonData);
+  const calculator = parsedPersonData.amount - expensiveRes.amount;
+  console.log(calculator);
   return (
     <Layout>
       <div className="container mx-auto h-[100vh] flex items-center justify-center  align-middle">
@@ -15,7 +22,7 @@ const HomePage = () => {
           </figure>
           <div className="card-body text-center">
             <h2 className="text-lg">Current Balance</h2>
-            <p className="font-bold">৳ 654</p>
+            <p className="font-bold">৳ {calculator}</p>
           </div>
         </div>
       </div>
