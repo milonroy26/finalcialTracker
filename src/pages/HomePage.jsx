@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 
 const HomePage = () => {
-  const expensiveData = localStorage.getItem("expensive");
-  const expensiveRes = JSON.parse(expensiveData);
-  // income
-  const storedPersonData = localStorage.getItem("income");
-  const parsedPersonData = JSON.parse(storedPersonData);
-  const calculator = parsedPersonData.amount - expensiveRes.amount;
-  console.log(calculator);
+  const [incomedata, setIncomeData] = useState([]);
+  let [incomeTotal, setIncomeTotal] = useState(0);
+
+  const [expensedata, setExpenseData] = useState([]);
+  let [expenseTotal, setExpenseTotal] = useState(0);
+
+  const currentBalance = incomeTotal - expenseTotal;
+
+  useEffect(() => {
+    const storedIncomeData = JSON.parse(localStorage.getItem("income"));
+    if (storedIncomeData) {
+      storeData(storedIncomeData);
+    }
+
+    const storedExpenseData = JSON.parse(localStorage.getItem("expense"));
+    if (storedExpenseData) {
+      storeExpenseData(storedExpenseData);
+    }
+  }, []);
+
+  const storeData = (storedIncomeData) => {
+    setIncomeData(storedIncomeData);
+    setIncomeTotal(
+      storedIncomeData.reduce((prev, next) => prev + Number(next.amount), 0)
+    );
+  };
+
+  const storeExpenseData = (storedExpenseData) => {
+    setExpenseData(storedExpenseData);
+    setExpenseTotal(
+      storedExpenseData.reduce((prev, next) => prev + Number(next.amount), 0)
+    );
+  };
+
   return (
     <Layout>
       <div className="container mx-auto h-[100vh] flex items-center justify-center  align-middle">
@@ -21,8 +48,13 @@ const HomePage = () => {
             />
           </figure>
           <div className="card-body text-center">
-            <h2 className="text-lg">Current Balance</h2>
-            <p className="font-bold">৳ {calculator}</p>
+            <h2 className="text-lg font-bold">
+              Current Balance : 💸 {currentBalance}{" "}
+            </h2>
+            <div className="flex justify-between mt-3">
+              <p className="font-bold">⭕ Income Total : 💸 {incomeTotal}</p>
+              <p className="font-bold">⭕ Expense Total : 💸 {expenseTotal}</p>
+            </div>
           </div>
         </div>
       </div>
