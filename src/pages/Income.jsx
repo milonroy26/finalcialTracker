@@ -70,14 +70,14 @@ const Income = () => {
               }}
               type="text"
               placeholder="Type here"
-              className="input input-bordered input-info w-full max-w-xs block"
+              className="input input-bordered input-info w-full  block"
             />
             <textarea
               value={FormObj.discription}
               onChange={(e) => {
                 inputOnChange("discription", e.target.value);
               }}
-              className="textarea textarea-success block mt-4"
+              className="textarea w-full textarea-success block mt-4"
               placeholder="Discription"
             ></textarea>
 
@@ -101,9 +101,8 @@ const Income = () => {
                   return (
                     <tr key={index}>
                       <th>{index + 1}</th>
-                      <td>{item.discription}</td>
                       <td>{item.amount}</td>
-
+                      <td>{item.discription}</td>
                       <td>
                         <button
                           className="btn btn-xs btn-circle btn-outline"
@@ -131,13 +130,6 @@ const Income = () => {
                   );
                 })}
               </tbody>
-              <tfoot>
-                <tr>
-                  <th colSpan="2" className="text-end">
-                    Total
-                  </th>
-                </tr>
-              </tfoot>
             </table>
           </div>
         </div>

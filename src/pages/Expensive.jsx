@@ -68,14 +68,14 @@ const Expensive = () => {
               }}
               type="text"
               placeholder="Type here"
-              className="input input-bordered input-info w-full max-w-xs block"
+              className="input input-bordered input-info w-full"
             />
             <textarea
               value={FormObj.discription}
               onChange={(e) => {
                 inputOnChange("discription", e.target.value);
               }}
-              className="textarea textarea-success block mt-4"
+              className="textarea textarea-success block mt-4 w-full"
               placeholder="Discription"
             ></textarea>
 
@@ -99,9 +99,8 @@ const Expensive = () => {
                   return (
                     <tr key={index}>
                       <th>{index + 1}</th>
-                      <td>{item.discription}</td>
                       <td>{item.amount}</td>
-
+                      <td>{item.discription}</td>
                       <td>
                         <button
                           onClick={() => {
@@ -129,13 +128,6 @@ const Expensive = () => {
                   );
                 })}
               </tbody>
-              <tfoot>
-                <tr>
-                  <th colSpan="2" className="text-end">
-                    Total
-                  </th>
-                </tr>
-              </tfoot>
             </table>
           </div>
         </div>
